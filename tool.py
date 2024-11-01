@@ -1,8 +1,8 @@
 import base64,requests,random,string,re,chardet
 import warnings
 from cryptography.utils import CryptographyDeprecationWarning
-with warnings.catch_warnings(action="ignore", category=CryptographyDeprecationWarning):
-    import paramiko
+#with warnings.catch_warnings(action="ignore", category=CryptographyDeprecationWarning):
+#    import paramiko
 from scp import SCPClient
 
 def get_encoding(file):
