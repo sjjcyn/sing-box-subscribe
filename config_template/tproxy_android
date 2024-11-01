@@ -90,7 +90,7 @@
         "{all}"
       ],
       "filter":[
-        {"action":"include","keywords":["港|台|新加|日|美|韩|泰"]}
+        {"action":"include","keywords":["港|台|新加|日|美|韩|泰"]}]
     },
 {
       "tag":"国内出口",
@@ -100,7 +100,7 @@
         "{all}"
       ],
       "filter":[
-        {"action":"include","keywords":["移动|联通|电信"]}
+        {"action":"include","keywords":["移动|联通|电信"]}]
     },
 {
       "tag":"游戏出口",
@@ -110,7 +110,7 @@
         "{all}"
       ],
       "filter":[
-        {"action":"include","keywords":["移动|联通|电信"]}
+        {"action":"include","keywords":["移动|联通|电信"]}]
     },
 {
       "tag":"其他地区",
@@ -121,7 +121,7 @@
       ],
       "filter":[
         {"action":"exclude","keywords":["港|台|新加|日|美|移动|联通|电信|韩|泰|最新|回国|以下"]}
-    },
+    ]},
     
     {
       "tag":"AdBlock",
