@@ -86,6 +86,7 @@
       "tag":"国外出口",
       "type":"selector",
       "outbounds":[
+＂国外urltest＂,
         "direct",
         "{all}"
       ],
@@ -136,7 +137,18 @@
       "filter":[
         {"action":"exclude","keywords":["港|台|新加|日|美|移动|联通|电信|韩|泰|最新|回国|以下"]}
     ]},
-
+{
+      "tag":"国外urltest",
+      "type":"urltest",
+      "outbounds":[
+        "{all}"
+      ],
+      "filter":[
+        {"action":"include","keywords":["港|台|新加|日|美|移动|联通|电信|韩|泰"]}],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "10m",
+      "tolerance": 50
+    },
     {
       "tag":"AdBlock",
       "type":"selector",
