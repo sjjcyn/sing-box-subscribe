@@ -156,7 +156,7 @@ regex_patterns = {
     '🇭🇳': re.compile(r'洪都拉斯|Honduras'),
     '🇳🇮': re.compile(r'尼加拉瓜|(\s|-)?NI\d*|Nicaragua'),
     '🇦🇶': re.compile(r'南极|南極|(\s|-)?AQ\d*|Antarctica'),
-    '🇨🇳': re.compile(r'中国|中國|江苏|北京|上海|广州|深圳|杭州|徐州|青岛|宁波|镇江|沈阳|济南|回国|back|(\s|-)?CN(?!2GIA)\d*|China'),
+    '🇨🇳': re.compile(r'中国|中國|江苏|北京|上海|广州|深圳|杭州|徐州|青岛|宁波|镇江|沈阳|武汉|济南|回国|back|(\s|-)?CN(?!2GIA)\d*|China'),
 }
 def rename(input_str):
     for country_code, pattern in regex_patterns.items():
