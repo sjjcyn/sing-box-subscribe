@@ -86,7 +86,7 @@
       "tag":"国外出口",
       "type":"selector",
       "outbounds":[
-      ＂国外urltest",
+      "国外urltest",
         "direct",
         "{all}"
       ],
