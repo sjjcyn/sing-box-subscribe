@@ -1,4 +1,4 @@
-{
+u{
   "log": {
     "level": "info",
     "timestamp": true
@@ -144,7 +144,7 @@
         "{all}"
       ],
       "filter":[
-        {"action":"include","keywords":["港|台|新加|日|美|移动|联通|电信|韩|泰"]}],
+        {"action":"include","keywords":["港|台|新加|日|美|韩|泰"]}],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "10m",
       "tolerance": 50
