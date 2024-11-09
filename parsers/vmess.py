@@ -24,6 +24,9 @@ def parse(data):
                 'security': _path[0].split(":")[0] if ':' in _path[0] else 'auto',
                 'alter_id': int(netquery.get('alterId','0')),
                 'packet_encoding': 'xudp'
+         
+                    
+                
             }
             if (netquery.get('tls') and netquery['tls'] != '') or (netquery.get('security') == 'tls'):
                 node['tls']={
@@ -95,7 +98,7 @@ def parse(data):
                 'fingerprint': item['fp']
             }
     if item.get("net"):
-        if item['net'] in ['h2', 'http']:
+        if item['net'] =='http':
             node['transport'] = {
                 'type':'http'
             }
@@ -135,6 +138,15 @@ def parse(data):
                 'type':'grpc',
                 'service_name':item.get('path', '')
             }
+        else:
+        # 默认处理方式
+            node['transport'] = {
+                "type": "http",
+                  "host": "pull.free.video.10010.com",
+                  "path": "/",
+                  "method": "GET",
+                  "headers": {"Connection": "keep-alive"}
+        }
     if item.get('protocol') in ['smux', 'yamux', 'h2mux']:
         node['multiplex'] = {
             'enabled': True,
