@@ -1,4 +1,4 @@
-u{
+{
   "log": {
     "level": "info",
     "timestamp": true
@@ -266,6 +266,7 @@ u{
       },
       {
         "rule_set": ["geosite-category-games", "geosite-dmm"],
+        "network" : "udp",
         "outbound": "游戏出口"
       },
       {
