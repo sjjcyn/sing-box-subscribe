@@ -22,7 +22,7 @@
     "servers": [
       {
         "tag": "proxyDns",
-        "address": "1.1.1.1",
+        "address": "fakeip",
         "detour": "国外出口"
       },
       {
