@@ -1,4 +1,5 @@
 #!/bin/sh
+pip install -r requirements.txt
 
 # 创建 /etc/init.d/sfc 文件并写入脚本内容
 cat << 'EOF' > /etc/init.d/sfc
