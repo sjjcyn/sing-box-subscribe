@@ -67,7 +67,7 @@
   },
   "inbounds": [
     {      "type": "tun",      "tag": "tun-in",      "interface_name": "singbox",      "address": [        "172.18.0.1/30",
-    "fdfe:dcba:9876::1/126"    ],      "mtu": 9000,      "stack": "system",      "sniff": true,      "sniff_timeout": "200ms",      "sniff_override_destination": false,      "auto_route": true,      "strict_route": true    },
+    "fdfe:dcba:9876::1/126"    ],      "mtu": 9000,      "stack": "system",      "sniff": true,      "sniff_timeout": "200ms",      "sniff_override_destination": false,      "auto_route": true,      "strict_route": true    }
   ],
   "outbounds": [
     {
