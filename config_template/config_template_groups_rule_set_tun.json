@@ -61,6 +61,15 @@
         "rule_set": "geosite-geolocation-!cn",
         "server": "proxyDns"
       }
+"disable_cache": false,
+    "disable_expire": false,
+    "independent_cache": false,
+    "cache_capacity": 0,
+    "reverse_mapping": false,
+    
+    "fakeip": { "enabled": true,
+  "inet4_range": "198.18.0.0/15",
+  "inet6_range": "fc00::/18"}
     ],
     "final": "proxyDns",
     "strategy": "prefer_ipv4"
