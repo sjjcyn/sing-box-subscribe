@@ -11,7 +11,7 @@ USE_PROCD=1
 
 NAME="sfc"
 PROG="/usr/bin/python3"
-SCRIPT="./app.py"  # 使用相对路径
+SCRIPT="./api/app.py"  # 使用相对路径
 WORKDIR="/root/sing-box-subscribe"  # 指定工作目录
 
 start_service() {
