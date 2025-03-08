@@ -77,7 +77,7 @@
             "type": "tproxy",
             "tag": "tproxy-in",
             "listen": "::",
-            "listen_port": 7895
+            "listen_port": 7895,
             "sniff": true
         }
   ],
