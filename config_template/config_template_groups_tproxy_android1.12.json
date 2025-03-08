@@ -162,7 +162,7 @@
  "route": {
     "auto_detect_interface": true,
     "final": "国外出口",
-"default_mark": 666
+"default_mark": 666,
     "rules": [
       {
         "type": "logical",
