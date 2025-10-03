@@ -30,24 +30,57 @@
         "detour": "direct"
       },
       {
-        "tag": "block",
-        "address": "rcode://success"
+        "tag": "block",{
+  "log": {
+    "level": "info",
+    "timestamp": true
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "[::]:9090",
+      "external_ui": "ui",
+      "secret": "",
+      "external_ui_download_url": "https://ghfast.top/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip",
+      "external_ui_download_detour": "direct",
+      "default_mode": "rule"
+    },
+    "cache_file": {
+      "enabled": true,
+      "store_fakeip": false
+    }
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "proxyDns",
+        "type": "tls",
+        "server": "1.1.1.1",
+        "detour": "国外出口"
+      },
+      
+      {
+        "tag": "outDns",
+        "type":"local"
+      },
+      {
+        "tag": "localDns",
+        "type": "udp",
+        "server": "223.5.5.5",
+        "detour": "国内出口"
       }
     ],
     "rules": [
       {
         "rule_set": "geosite-category-ads-all",
-        "server": "block"
+        "action": "reject",
+        "method": "",
+        "no_drop": false
       },
-      {
-        "outbound": "any",
-        "server": "localDns",
-        "disable_cache": true
-      },
+     
       {
         "rule_set": "geosite-cn",
         "server": "localDns"
-      },   
+      },
       {
         "clash_mode": "direct",
         "server": "localDns"
@@ -65,22 +98,36 @@
     "strategy": "prefer_ipv4"
   },
   "inbounds": [
-          {
-            "type": "mixed",
-            "tag": "mixed-in",
-            "listen": "::",
-            "listen_port": 7080,
-            "sniff": true,
-            "domain_strategy": "prefer_ipv4"
-        },
+    {
+      "type": "tproxy",
+      "tag": "tproxy-in",
+      "listen": "::",
+      "listen_port": 9898,
+      "tcp_fast_open": true,
+     "routing_mark": 255
+    },
+    {
+      "type": "hysteria2",
+      "tag": "hy2-in",
+      "listen": "::",
+      "listen_port": 8444,
+      "users": [
         {
-            "type": "tproxy",
-            "tag": "tproxy-in",
-            "listen": "::",
-            "listen_port": 7895,
-            "sniff": true
+          "password": "12344321"
         }
+      ],
+      "masquerade": "https://bing.com",
+      "tls": {
+        "enabled": true,
+        "alpn": [
+          "h3"
+        ],
+        "certificate_path": "/etc/hysteria/cert.pem",
+        "key_path": "/etc/hysteria/private.key"
+      }
+    }
   ],
+
   "outbounds": [
     {
       "tag":"国外出口",
@@ -149,48 +196,31 @@
       "interval": "10m",
       "tolerance": 50
     },
-    {
-      "tag":"AdBlock",
-      "type":"selector",
-      "outbounds":[
-        "block",
-        "direct"
-      ]
-    },
+    
     {
       "type": "direct",
       "tag": "direct"
-    },
-    {
-      "type": "dns",
-      "tag": "dns-out"
-    },
-    {
-      "type": "block",
-      "tag": "block"
     }
   ],
-  "route": {
+   "route": {
+    "default_domain_resolver": {
+      "server": "outDns"},
     "auto_detect_interface": true,
     "final": "国外出口",
-"default_mark": 666,
     "rules": [
+    
       {
-        "type": "logical",
-        "mode": "or",
-        "rules":[
-          {
-            "port":53
-          },
-          {
-            "protocol": "dns"
-          }
-        ],
-        "outbound": "dns-out"
+        "inbound": "tproxy-in",
+        "action": "sniff",
+        "timeout": "1s"
+      },
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
       },
       {
         "rule_set": "geosite-category-ads-all",
-        "outbound": "AdBlock"
+        "action": "reject"
       },
       {
         "clash_mode": "direct",
@@ -206,16 +236,16 @@
           "yacd.metacubex.one",
           "yacd.haishan.me",
           "d.metacubex.one",
-"idtrust.bgigc.com"
+          "idtrust.bgigc.com"
         ],
         "outbound": "direct"
       },
-{
-      "domain_suffix": [
+      {
+        "domain_suffix": [
           "gov.cn"
         ],
-        "outbound": "direct"},
-
+        "outbound": "direct"
+      },
       {
         "ip_is_private": true,
         "outbound": "direct"
@@ -225,19 +255,33 @@
         "outbound": "国外出口"
       },
       {
-        "rule_set": ["geosite-youtube", "geoip-google", "geosite-google", "geosite-github"],
+        "rule_set": [
+          "geosite-youtube",
+          "geoip-google",
+          "geosite-google",
+          "geosite-github"
+        ],
         "outbound": "国外出口"
       },
       {
-        "rule_set": ["geoip-telegram", "geosite-telegram"],
+        "rule_set": [
+          "geoip-telegram",
+          "geosite-telegram"
+        ],
         "outbound": "国外出口"
       },
       {
-        "rule_set": ["geoip-twitter", "geosite-twitter"],
+        "rule_set": [
+          "geoip-twitter",
+          "geosite-twitter"
+        ],
         "outbound": "国外出口"
       },
       {
-        "rule_set":["geoip-facebook", "geosite-facebook"],
+        "rule_set": [
+          "geoip-facebook",
+          "geosite-facebook"
+        ],
         "outbound": "国外出口"
       },
       {
@@ -257,7 +301,10 @@
         "outbound": "国外出口"
       },
       {
-        "rule_set": ["geoip-netflix", "geosite-netflix"],
+        "rule_set": [
+          "geoip-netflix",
+          "geosite-netflix"
+        ],
         "outbound": "国外出口"
       },
       {
@@ -265,7 +312,11 @@
         "outbound": "国外出口"
       },
       {
-        "rule_set": ["geoip-apple", "geosite-apple", "geosite-amazon"],
+        "rule_set": [
+          "geoip-apple",
+          "geosite-apple",
+          "geosite-amazon"
+        ],
         "outbound": "国外出口"
       },
       {
@@ -273,12 +324,18 @@
         "outbound": "国外出口"
       },
       {
-        "rule_set": ["geosite-category-games", "geosite-dmm"],
-        "network" : "udp",
+        "rule_set": [
+          "geosite-category-games",
+          "geosite-dmm"
+        ],
+        "network": "udp",
         "outbound": "游戏出口"
       },
       {
-        "rule_set": ["geosite-hbo", "geosite-primevideo"],
+        "rule_set": [
+          "geosite-hbo",
+          "geosite-primevideo"
+        ],
         "outbound": "国外出口"
       },
       {
@@ -286,7 +343,10 @@
         "outbound": "国外出口"
       },
       {
-        "rule_set": ["geoip-cn", "geosite-cn"],
+        "rule_set": [
+          "geoip-cn",
+          "geosite-cn"
+        ],
         "outbound": "国内出口"
       }
     ],
@@ -436,7 +496,7 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/apple.srs",
-        "download_detour": "国外出口"
+        "download_detour": "direct"
       },
       {
         "tag": "geosite-amazon",
